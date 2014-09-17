@@ -63,7 +63,7 @@ class UserController extends AdminController {
         );
 
         //print $this->model->where('docFormat','picture')->get()->toJSON();
-
+        $this->place_action = 'first';
         return parent::getIndex();
 
     }
@@ -74,7 +74,7 @@ class UserController extends AdminController {
         $this->fields = array(
             array('fullname',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
             array('email',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true,'attr'=>array('class'=>'expander'))),
-            array('mobile',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
+            array('mobile',array('kind'=>'numeric','query'=>'like','pos'=>'both','show'=>true)),
             array('address_1',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
             array('createdDate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),
             array('lastUpdate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),

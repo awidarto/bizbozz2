@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
         "jenssegers/mongodb": "*",
-        "nitmedia/wkhtml2pdf": "dev-master",
+        "jenssegers/mongodb-session": "*",
         "anahkiasen/former": "dev-master",
         "intervention/image": "2.*",
         "intervention/imagecache": "dev-master",
@@ -18,7 +18,10 @@
         "knplabs/knp-snappy": "*",
         "barryvdh/laravel-snappy": "dev-master",
         "flynsarmy/db-blade-compiler": "1.*",
-        "pingpong/menus": "1.0.*"
+        "pingpong/menus": "1.0.*",
+        "cartalyst/sentry": "2.1.*",
+        "jenssegers/mongodb-sentry": "*",
+        "nitmedia/wkhtml2pdf": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

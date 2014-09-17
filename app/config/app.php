@@ -108,6 +108,7 @@ return array(
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Jenssegers\Mongodb\MongodbServiceProvider',
+        'Jenssegers\Mongodb\Session\SessionServiceProvider',
         'Former\FormerServiceProvider',
         'Intervention\Validation\ValidationServiceProvider',
         'Intervention\Image\ImageServiceProvider',
