@@ -5,3 +5,10 @@ table.dataTable {
     max-width: none !important;
     font-size: 11px;
 }
+
+span.tag{
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: #ccc;
+    margin: 2px;
+}

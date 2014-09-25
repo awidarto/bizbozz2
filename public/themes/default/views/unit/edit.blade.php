@@ -12,122 +12,20 @@
 <div class="row-fluid">
     <div class="col-md-6">
 
-        {{ Former::text('SKU','SKU') }}
-        {{ Former::select('status')->options(array('inactive'=>'Inactive','active'=>'Active'))->label('Status') }}
-        {{-- Former::select('category','Category')->options(Prefs::ExtractProductCategory()) --}}
-        {{ Former::select('categoryLink','Category')->options(Prefs::getProductCategory()->productCatToSelection('slug', 'title' )) }}
-        {{ Former::text('series','Series') }}
-        {{ Former::text('itemDescription','Description') }}
-        {{ Former::text('itemGroup','Item Group')->help('for compound product only') }}
-        {{ Former::text('priceRegular','Regular Price')->class('col-md-4') }}
-        {{ Former::text('priceDiscount','Discount Price')->class('col-md-4') }}
+        {{ Former::text('building','building') }}
+        {{ Former::text('floor','Floor') }}
+        {{ Former::text('number','Number') }}
+        {{ Former::text('type','Unit Type') }}
+        {{ Former::text('rentalRate','Rental Rate Monthly')->class('col-md-4 form-control') }}
+        {{ Former::text('squareMeter','Square Meter')->class('col-md-4 form-control') }}
+        {{ Former::select('categoryLink','Category')->options(Prefs::getUnitCategory()->UnitCatToSelection('slug', 'title' )) }}
 
-        {{ Former::text('discFromDate','Disc. From')->class('col-md-7 offset-2 eventdate')
-            ->id('fromDate')
-            //->data_format('dd-mm-yyyy')
-            ->append('<i class="icon-th"></i>') }}
-
-        {{ Former::text('discToDate','Disc. Until')->class('col-md-7 offset-2 eventdate')
-            ->id('toDate')
-            //->data_format('dd-mm-yyyy')
-            ->append('<i class="icon-th"></i>') }}
-
-        {{ Former::text('material','Material') }}
-        {{ Former::text('colour','Colour')->class('col-md-4') }}
-        {{--
-
-        <div class="row-fluid form-vertical">
-            <div class="col-md-4">
-                {{ Former::text('colour','Colour')->class('span12') }}
-            </div>
-            <div class="col-md-4">
-                {{ Former::text('colourHex','')->class('pick-a-color') }}
-            </div>
-        </div>
-        --}}
-
-        <div class="row-fluid form-vertical">
-            <div class="col-md-4">
-                {{ Former::text('W','Width')->class('span12')}}
-            </div>
-            <div class="col-md-4">
-                {{ Former::text('H','Height')->class('span12') }}
-            </div>
-            <div class="col-md-4">
-                {{ Former::text('L','Length')->class('span12') }}
-            </div>
-        </div>
-        <div class="row-fluid form-vertical">
-            <div class="col-md-4">
-                {{ Former::text('D','Diameter')->class('span12')}}
-            </div>
-            <div class="col-md-4">
-                {{ Former::text('sizeDescription','Dimension Description') }}
-            </div>
-        </div>
+        {{ Former::text('unitDescription','Description') }}
 
         {{ Former::text('tags','Tags')->class('tag_keyword') }}
 
-        {{ Former::text('relatedProducts')->class('tag_related') }}
-
-        {{ Former::text('recommendedProducts')->class('tag_recommended') }}
-
     </div>
     <div class="col-md-6">
-        <div class="row-fluid form-vertical">
-            <div class="span2" style="text-align:right;width:120px;">
-                Inventory
-            </div>
-            <div class="span9" style="padding-left:10px;">
-                <table class="table " >
-                    <tr>
-                        <th>
-                            Outlet
-                        </th>
-                        <th>
-                            Sold
-                        </th>
-                        <th>
-                            Reserved
-                        </th>
-                        <th>
-                            Avail.
-                        </th>
-                        <th>
-                            Add Qty.
-                        </th>
-                        <th>
-                            <span style="color:red;">(Adjust Qty.)</span>
-                        </th>
-                    </tr>
-                    @foreach( Prefs::getOutlet()->OutletToArray() as $o)
-                        <tr>
-                            <td>
-                                {{ $o->name }}
-                            </td>
-                            <td>
-                                {{ $formdata['stocks'][$o->_id]['sold'] }}
-                            </td>
-                            <td>
-                                {{ $formdata['stocks'][$o->_id]['reserved'] }}
-                            </td>
-                            <td>
-                                {{ $formdata['stocks'][$o->_id]['available'] }}
-                            </td>
-                            <td>
-                                <input type="hidden" name="outlets[]"  value="{{ $o->_id }}">
-                                <input type="hidden" name="outletNames[]"  value="{{ $o->name }}">
-                                <input type="text" class="col-md-6" id="{{ $o->_id }}" name="addQty[]" value="" />
-                            </td>
-                            <td>
-                                <input type="text" class="col-md-6" id="{{ $o->_id }}" name="adjustQty[]" value="" />
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-
-        </div>
 
         <?php
             $fupload = new Fupload();
@@ -139,17 +37,12 @@
 </div>
 
 <div class="row-fluid right">
-    <div class="span12">
+    <div class="col-md-12">
         {{ Form::submit('Save',array('class'=>'btn btn-primary'))}}&nbsp;&nbsp;
         {{ HTML::link($back,'Cancel',array('class'=>'btn'))}}
     </div>
 </div>
 {{Former::close()}}
-
-{{ HTML::style('css/autocompletes.css') }}
-{{ HTML::script('js/autocompletes.js') }}
-
-
 
 <script type="text/javascript">
 

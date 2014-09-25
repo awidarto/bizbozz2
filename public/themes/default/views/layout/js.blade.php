@@ -13,10 +13,12 @@
 
     {{ HTML::script('js/jquery.tagsinput.js') }}
 
-    {{-- HTML::script('js/bootstrap-timepicker.js') --}}
-    {{ HTML::script('js/sm-datepicker/bootstrap-datetimepicker.min.js') }}
 
     {{ HTML::script('js/moment.min.js') }}
+
+    {{ HTML::script('js/smalot/bootstrap-datetimepicker.min.js') }}
+    {{-- HTML::script('js/sm-datepicker/bootstrap-datetimepicker.min.js') --}}
+
     {{ HTML::script('js/daterangepicker.js') }}
 
     {{ HTML::script('js/accounting.min.js')}}

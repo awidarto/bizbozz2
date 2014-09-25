@@ -45,12 +45,22 @@ td.group{
     width:100px;
 }
 
+.table-responsive{
+    overflow-x: auto;
+}
+
+select.input-sm {
+    height: 30px;
+    line-height: 30px;
+    padding-top: 0px !important;
+}
+
 </style>
 
 
 {{--
 <div class="row-fluid box">
-   <div class="span12 box-content">
+   <div class="col-md-12 box-content">
         <table class="table table-condensed dataTable">--}}
 <section class="panel panel-info">
     <header class="panel-heading">{{ $title }}</header>
@@ -139,15 +149,14 @@ td.group{
                             @if(isset($in[1]['search']) && $in[1]['search'] == true)
                                 @if(isset($in[1]['date']) && $in[1]['date'])
                                     <td>
-                                        <div class="input-append date datepickersearch" id="{{ $index }}" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input class="col-md-8 search_init form-control input-sm dateinput" size="16" type="text" value="" placeholder="{{$in[0]}}" >
-                                            <span class="add-on"><i class="icon-th"></i></span>
+                                        <div class="input-append date datepickersearch" id="{{ $index }}" >
+                                            <input class="col-md-8 search_init form-control input-sm dateinput" data-date="" data-date-format="dd-mm-yyyy" size="16" type="text" value="" placeholder="{{$in[0]}}" >
                                         </div>
                                         {{--
                                         <div id="{{ $index }}" class="input-append datepickersearch">
                                             <input id="{{ $index }}" name="search_{{$in[0]}}" data-format="dd-MM-yyyy" class="search_init form-control input-sm dateinput" type="text" placeholder="{{$in[0]}}" ></input>
                                             <span class="add-on">
-                                                <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                                <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                                 </i>
                                             </span>
                                         </div>
@@ -157,15 +166,14 @@ td.group{
                                     </td>
                                 @elseif(isset($in[1]['datetime']) && $in[1]['datetime'])
                                     <td>
-                                        <div class="input-append date datetimepickersearch" id="{{ $index }}" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input class="col-md-8 search_init form-control input-sm datetimeinput" size="16" type="text" value="" placeholder="{{$in[0]}}" >
-                                            <span class="add-on"><i class="fa fa-th"></i></span>
+                                        <div class="input-append date datetimepickersearch" id="{{ $index }}" >
+                                            <input class="col-md-8 search_init form-control input-sm datetimeinput"  data-date="" data-date-format="dd-mm-yyyy" size="16" type="text" value="" placeholder="{{$in[0]}}" >
                                         </div>
                                         {{--
                                         <div id="{{ $index }}" class="input-append datetimepickersearch">
                                             <input id="{{ $index }}" name="search_{{$in[0]}}" data-format="dd-MM-yyyy hh:mm:ss" class="search_init form-control input-sm datetimeinput" type="text" placeholder="{{$in[0]}}" ></input>
                                             <span class="add-on">
-                                                <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                                <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                                 </i>
                                             </span>
                                         </div>
@@ -175,7 +183,7 @@ td.group{
                                     <td>
                                         <input id="{{ $index }}" type="text" name="search_{{$in[0]}}" id="search_{{$in[0]}}" placeholder="{{$in[0]}}" value="" style="display:none;" class="search_init form-control input-sm {{ (isset($in[1]['class']))?$in[1]['class']:'filter'}}" />
                                         <div class="styled-select">
-                                            {{ Form::select('select_'.$in[0],$in[1]['select'],null,array('class'=>'selector form-control input-small','id'=>$index ))}}
+                                            {{ Form::select('select_'.$in[0],$in[1]['select'],null,array('class'=>'selector form-control input-sm','id'=>$index ))}}
                                         </div>
                                     </td>
                                 @else
@@ -450,7 +458,7 @@ td.group{
         @endif
 
 
-    	$('div.dataTables_length select').wrap('<div class="ingrid styled-select" />');
+    	//$('div.dataTables_length select').wrap('<div class="ingrid styled-select" />');
 
 
 		$('.dataTable tbody tr td span.expander').on( 'click', function () {
@@ -486,10 +494,11 @@ td.group{
 			maxView:2
 		});
 
-		eldate = $('.datepickersearch').datetimepicker({
+		eldate = $('.dateinput').datetimepicker({
 			minView:2,
 			maxView:2
 		});
+
 
 		eldate.on('changeDate', function(e) {
 
@@ -662,7 +671,7 @@ td.group{
 			console.log(form.serialize());
 
 			$.post(
-				'{{ URL::to('ajax/productpicture')}}',
+				'{{ URL::to($uploadurl)}}',
 					form.serialize(),
 					function(data){
 						if(data.result == 'OK:UPLOADED'){
@@ -771,7 +780,7 @@ td.group{
 
 				$('#loading-pictures').show();
 
-				$.post('{{ URL::to('ajax/productinfo') }}', { product_id: _id },
+				$.post('{{ URL::to($infourl) }}', { product_id: _id },
 					function(data){
 
 						$('#loading-pictures').hide();
@@ -803,7 +812,7 @@ td.group{
 
 
 					                var thumb = '<li><img style="width:125px;"  src="' + file.thumbnail_url + '" />'+
-					                    '<span class="file_del" id="' + file.file_id +'"><i class="icon-trash"></i></span>'+
+					                    '<span class="file_del" id="' + file.file_id +'"><i class="fa fa-trash"></i></span>'+
 					                    '&nbsp;&nbsp;<span class="img-title">' + file.filename + '</span><br />' +
 					                    '<input type="radio" name="defaultpic" ' + isdefault + ' value="' + file.file_id + '"> Default<br />'+
 					                    'Brochure <br />' +

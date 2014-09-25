@@ -58,7 +58,7 @@
                                     <div id="search_{{$in[0]}}" class="input-append datepickersearch">
                                         <input name="search_{{$in[0]}}" data-format="dd-MM-yyyy" class="search_init dateinput" type="text" placeholder="Search {{$in[0]}}" ></input>
                                         <span class="add-on">
-                                            <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                            <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                             </i>
                                         </span>
                                     </div>
@@ -68,7 +68,7 @@
                                     <div id="search_{{$in[0]}}" class="input-append datetimepickersearch">
                                         <input name="search_{{$in[0]}}" data-format="dd-MM-yyyy hh:mm:ss" class="search_init datetimeinput" type="text" placeholder="Search {{$in[0]}}" ></input>
                                         <span class="add-on">
-                                            <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                            <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                             </i>
                                         </span>
                                     </div>

@@ -39,7 +39,7 @@ th:first-child{
 
 </style>
 <div class="row-fluid">
-    <div class="span12 command-bar">
+    <div class="col-md-12 command-bar">
         <h3>{{ $title }}</h3>
      </div>
 </div>
@@ -67,7 +67,7 @@ th:first-child{
 </div>
 
 <div class="row-fluid">
-   <div class="span12">
+   <div class="col-md-12">
 
       <table class="table table-condensed dataTable">
 
@@ -129,13 +129,13 @@ th:first-child{
                                 <td>
                                     <div class="input-append date datepickersearch" id="{{ $index }}" data-date="" data-date-format="dd-mm-yyyy">
                                         <input class="col-md-8 search_init dateinput" size="16" type="text" value="" placeholder="{{$in[0]}}" >
-                                        <span class="add-on"><i class="icon-th"></i></span>
+                                        <span class="add-on"><i class="fa fa-th"></i></span>
                                     </div>
                                     {{--
                                     <div id="{{ $index }}" class="input-append datepickersearch">
                                         <input id="{{ $index }}" name="search_{{$in[0]}}" data-format="dd-MM-yyyy" class="search_init dateinput" type="text" placeholder="{{$in[0]}}" ></input>
                                         <span class="add-on">
-                                            <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                            <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                             </i>
                                         </span>
                                     </div>
@@ -147,13 +147,13 @@ th:first-child{
                                 <td>
                                     <div class="input-append date datetimepickersearch" id="{{ $index }}" data-date="" data-date-format="dd-mm-yyyy">
                                         <input class="col-md-8 search_init datetimeinput" size="16" type="text" value="" placeholder="{{$in[0]}}" >
-                                        <span class="add-on"><i class="icon-th"></i></span>
+                                        <span class="add-on"><i class="fa fa-th"></i></span>
                                     </div>
                                     {{--
                                     <div id="{{ $index }}" class="input-append datetimepickersearch">
                                         <input id="{{ $index }}" name="search_{{$in[0]}}" data-format="dd-MM-yyyy hh:mm:ss" class="search_init datetimeinput" type="text" placeholder="{{$in[0]}}" ></input>
                                         <span class="add-on">
-                                            <i data-time-icon="icon-clock" data-date-icon="icon-calendar">
+                                            <i data-time-icon="fa fa-clock" data-date-icon="fa fa-calendar">
                                             </i>
                                         </span>
                                     </div>
@@ -807,7 +807,7 @@ th:first-child{
 
 
                                     var thumb = '<li><img style="width:125px;"  src="' + file.thumbnail_url + '" />'+
-                                        '<span class="file_del" id="' + file.file_id +'"><i class="icon-trash"></i></span>'+
+                                        '<span class="file_del" id="' + file.file_id +'"><i class="fa fa-trash"></i></span>'+
                                         '&nbsp;&nbsp;<span class="img-title">' + file.filename + '</span><br />' +
                                         '<input type="radio" name="defaultpic" ' + isdefault + ' value="' + file.file_id + '"> Default<br />'+
                                         'Brochure <br />' +

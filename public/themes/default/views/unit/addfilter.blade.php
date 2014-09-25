@@ -13,7 +13,7 @@
   </div>
   <div class="modal-body" >
         <h4 id="upload-title-id"></h4>
-        {{ Former::select('assigned', 'Category')->options(Prefs::getProductCategory()->ProductCatToSelection('slug','title',true))->id('assigned-category')}}
+        {{ Former::select('assigned', 'Category')->options(Prefs::getUnitCategory()->UnitCatToSelection('slug','title',true))->id('assigned-category')}}
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

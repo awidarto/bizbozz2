@@ -98,6 +98,10 @@ class AdminController extends Controller {
 
     public $table_view = 'tables.simple';
 
+    public $infourl = 'ajax/productinfo';
+
+    public $uploadurl = 'ajax/productpicture';
+
 	public function __construct(){
 
 		date_default_timezone_set('Asia/Jakarta');
@@ -159,7 +163,7 @@ class AdminController extends Controller {
 
 		// add selector and sequence columns
         if($this->place_action == 'both' || $this->place_action == 'first'){
-            array_unshift($heads, array('Actions',array('sort'=>false,'class'=>'action')));
+            array_unshift($heads, array('Actions',array('sort'=>false,'clear'=>true,'class'=>'action')));
         }
         if($this->show_select == true){
             array_unshift($heads, array($select_all,array('sort'=>false)));
@@ -194,6 +198,8 @@ class AdminController extends Controller {
 			->with('disablesort',$disablesort )
 			->with('addurl',$this->addurl )
             ->with('importurl',$this->importurl )
+            ->with('infourl',$this->infourl )
+            ->with('uploadurl',$this->uploadurl )
 			->with('ajaxsource',URL::to($this->ajaxsource) )
 			->with('ajaxdel',URL::to($this->delurl) )
             ->with('ajaxdlxl',URL::to($this->dlxl) )

@@ -12,10 +12,11 @@ class UnitcategoryController extends AdminController {
         //$this->crumb->append('Home','left',true);
         //$this->crumb->append(strtolower($this->controller_name));
 
-        $this->model = new Category();
+        $this->model = new Unitcategory();
         //$this->model = DB::collection('documents');
         $this->title = $this->controller_name;
 
+        $this->title = 'Unit Category';
     }
 
     public function getTest()
@@ -31,7 +32,6 @@ class UnitcategoryController extends AdminController {
 
         $this->heads = array(
             array('Title',array('search'=>true,'sort'=>true)),
-            array('Section',array('search'=>true,'sort'=>true)),
             array('Created',array('search'=>true,'sort'=>true,'date'=>true)),
             array('Last Update',array('search'=>true,'sort'=>true,'date'=>true)),
         );
@@ -51,7 +51,6 @@ class UnitcategoryController extends AdminController {
 
         $this->fields = array(
             array('title',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('section',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
             array('createdDate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),
             array('lastUpdate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),
         );
@@ -69,8 +68,6 @@ class UnitcategoryController extends AdminController {
             'slug'=> 'required'
         );
 
-        $this->backlink = 'content/category';
-
         return parent::postAdd($data);
     }
 
@@ -81,15 +78,13 @@ class UnitcategoryController extends AdminController {
             'slug'=> 'required'
         );
 
-        $this->backlink = 'content/category';
-
         return parent::postEdit($id,$data);
     }
 
     public function makeActions($data)
     {
         $delete = '<span class="del" id="'.$data['_id'].'" ><i class="fa fa-trash"></i>Delete</span>';
-        $edit = '<a href="'.URL::to('category/edit/'.$data['_id']).'"><i class="fa fa-edit"></i>Update</a>';
+        $edit = '<a href="'.URL::to('unitcategory/edit/'.$data['_id']).'"><i class="fa fa-edit"></i>Update</a>';
 
         $actions = $edit.'<br />'.$delete;
         return $actions;

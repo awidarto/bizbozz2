@@ -69,43 +69,6 @@
 
     	var sharelist = {};
 
-        var dateinputs = $('.datepicker');
-
-        // work around for Former form lib for Laravel to create proper markup for date picker element
-        dateinputs.each(function(){
-            $(this).parent().addClass('datepicker');
-            $(this).removeClass('datepicker');
-        })
-
-        /*
-	    $('.timepicker').timepicker({
-	        minuteStep: 10,
-	        showSeconds: false,
-	        showMeridian: false
-	    });
-
-		//$('.date').datetimepicker({
-		$('.date').datepicker({
-			dateFormat: "dd-mm-yy"
-			//pickTime: false
-		});
-		*/
-
-        $('.datepicker').daterangepicker({
-            singleDatePicker:true,
-                    startDate: moment(),
-                    endDate: moment().add('days',30),
-                    minDate: '01/01/2012'
-            });
-
-        $('.datepicker').on('show',function(ev,picker){
-            console.log($(this).val());
-            var picked = $(this).val();
-            if ( typeof(picked) !== "undefined" && picked !== null && picked !== '' ) {
-                picker.setStartDate(moment(picked,'MM/DD/YYYY'));
-            }
-        });
-
         $('.eventdate').daterangepicker({
                 maxDate: moment().add('months',12)
             },function(start, end){

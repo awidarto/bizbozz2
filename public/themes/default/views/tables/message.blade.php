@@ -5,12 +5,12 @@
 <div class="tableHeader">
 		<h3>{{$title}}</h3>
 	@if(isset($addurl))
-		<a class="foundicon-add-doc button right newdoc action clearfix" href="{{URL::to($addurl)}}">&nbsp;&nbsp;<span>{{$newbutton}}</span></a>
+		<a class="foundfa fa-add-doc button right newdoc action clearfix" href="{{URL::to($addurl)}}">&nbsp;&nbsp;<span>{{$newbutton}}</span></a>
 	@endif
 </div>
 @endif
 
-<h4><i class="foundicon-down-arrow"></i>&nbsp;Inbox</h4>
+<h4><i class="foundfa fa-down-arrow"></i>&nbsp;Inbox</h4>
 <div class="row">
 	<table class="dataTable" id="inbox">
 	    <tbody>
@@ -18,7 +18,7 @@
 	</table>
 </div>
 
-<h4><i class="foundicon-up-arrow"></i>&nbsp;Outbox</h4>
+<h4><i class="foundfa fa-up-arrow"></i>&nbsp;Outbox</h4>
 <div class="row">
 	<table class="dataTable" id="outbox">
 	    <tbody>
@@ -40,15 +40,15 @@
 				"oTableTools": {
 					"sSwfPath": "assets/swf/copy_csv_xls_pdf.swf"
 				},
-				"aoColumnDefs": [ 
+				"aoColumnDefs": [
 				    { "bSortable": false, "aTargets": [ {{ $disablesort }} ] }
 				 ],
 			    "fnServerData": function ( sSource, aoData, fnCallback ) {
 		            $.ajax( {
-		                "dataType": 'json', 
-		                "type": "POST", 
-		                "url": sSource, 
-		                "data": aoData, 
+		                "dataType": 'json',
+		                "type": "POST",
+		                "url": sSource,
+		                "data": aoData,
 		                "success": fnCallback
 		            } );
 		        }
@@ -66,15 +66,15 @@
 				"oTableTools": {
 					"sSwfPath": "assets/swf/copy_csv_xls_pdf.swf"
 				},
-				"aoColumnDefs": [ 
+				"aoColumnDefs": [
 				    { "bSortable": false, "aTargets": [ {{ $disablesort }} ] }
 				 ],
 			    "fnServerData": function ( sSource, aoData, fnCallback ) {
 		            $.ajax( {
-		                "dataType": 'json', 
-		                "type": "POST", 
-		                "url": sSource, 
-		                "data": aoData, 
+		                "dataType": 'json',
+		                "type": "POST",
+		                "url": sSource,
+		                "data": aoData,
 		                "success": fnCallback
 		            } );
 		        }
@@ -87,7 +87,7 @@
 		} );
 
 		/*
-		 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in 
+		 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in
 		 * the footer
 		 */
 		$('tfoot input').each( function (i) {
@@ -119,7 +119,7 @@
 		} );
 
 		/*
-		 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in 
+		 * Support functions to provide a little bit of 'user friendlyness' to the textboxes in
 		 * the footer
 		 */
 		$('.filter input').each( function (i) {
@@ -154,7 +154,7 @@
 					autosize: true
 				});
 
-		   	}	
+		   	}
 
 			if ($(e.target).is('.fileview')) {
 				var _id = e.target.id;
@@ -167,7 +167,7 @@
 					autosize: true
 				});
 
-		   	}		   			   	
+		   	}
 
 			if ($(e.target).is('.metaview')) {
 				var doc_id = e.target.id;

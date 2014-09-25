@@ -3,159 +3,175 @@
 
 @section('content')
 
-<h3>{{$title}}</h3>
-    <div class="box" style="padding:20px;">
-        <div class="box-container">
-          <div class="row-fluid">
-            <div class="col-md-6">
-              <h1>
-                <a href="https://twitter.com/tahirtaous">
-                Logo here
-                </a>
-              </h1>
-            </div>
-            <div class="col-md-6 text-right">
-              <h1>INVOICE</h1>
-              <h1><small>Invoice #001</small></h1>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="col-md-5">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4>From: <a href="#">Your Name</a></h4>
-                </div>
-                <div class="panel-body">
-                  <p>
-                    Address <br>
-                    details <br>
-                    more <br>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5 offset2 text-right">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4>To : <a href="#">Client Name</a></h4>
-                </div>
-                <div class="panel-body">
-                  <p>
-                    Address <br>
-                    details <br>
-                    more <br>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- / end client details section -->
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>
-                  <h4>Service</h4>
-                </th>
-                <th>
-                  <h4>Description</h4>
-                </th>
-                <th>
-                  <h4>Hrs/Qty</h4>
-                </th>
-                <th>
-                  <h4>Rate/Price</h4>
-                </th>
-                <th>
-                  <h4>Sub Total</h4>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Article</td>
-                <td><a href="#">Title of your article here</a></td>
-                <td class="text-right">-</td>
-                <td class="text-right">$200.00</td>
-                <td class="text-right">$200.00</td>
-              </tr>
-              <tr>
-                <td>Template Design</td>
-                <td><a href="#">Details of project here</a></td>
-                <td class="text-right">10</td>
-                <td class="text-right">75.00</td>
-                <td class="text-right">$750.00</td>
-              </tr>
-              <tr>
-                <td>Development</td>
-                <td><a href="#">WordPress Blogging theme</a></td>
-                <td class="text-right">5</td>
-                <td class="text-right">50.00</td>
-                <td class="text-right">$250.00</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row-fluid text-right">
-            <div class="span2 offset8">
-              <p>
-                <strong>
-                Sub Total : <br>
-                TAX : <br>
-                Total : <br>
-                </strong>
-              </p>
-            </div>
-            <div class="span2">
-              <strong>
-              $1200.00 <br>
-              N/A <br>
-              $1200.00 <br>
-              </strong>
-            </div>
-          </div>
-          <div class="row-fluid">
-            <div class="col-md-5">
-              <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h4>Bank details</h4>
-                </div>
-                <div class="panel-body">
-                  <p>Your Name</p>
-                  <p>Bank Name</p>
-                  <p>SWIFT : --------</p>
-                  <p>Account Number : --------</p>
-                  <p>IBAN : --------</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-7">
-              <div class="col-md-7">
-                <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <h4>Contact Details</h4>
-                  </div>
-                  <div class="panel-body">
-                    <p>
-                      Email : you@example.com <br><br>
-                      Mobile : -------- <br> <br>
-                      Twitter : <a href="https://twitter.com/tahirtaous">@TahirTaous</a>
-                    </p>
-                    <h4>Payment should be made by Bank Transfer</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-{{ HTML::script('js/bootstrap-editable/js/bootstrap-editable.min.js') }}
+{{Former::open_for_files_horizontal($submit,'POST',array('class'=>'custom addAttendeeForm'))}}
 
-{{ HTML::script('js/wysihtml5-0.3.0.min.js') }}
-{{ HTML::script('js/parser_rules/advanced.js') }}
+                <div class="content-wrap no-padding">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <section class="panel no-margin">
+                                <div class="panel-body">
+                                    <div class="mg-b-lg clearfix">
+
+                                        <div class="pull-left">
+                                            <address>
+                                                <strong>Twitter, Inc.</strong>
+                                                <br>795 Folsom Ave, Suite 600
+                                                <br>San Francisco, CA 94107
+                                                <br>
+                                                <abbr title="Phone">P:</abbr>(123) 456-7890
+                                            </address>
+
+                                            <address>
+                                                <strong>Ichabod Crane</strong>
+                                                <br>
+                                                <a href="mailto:#">crane@twitter.com</a>
+                                            </address>
+
+                                        </div>
+
+                                        <div class="pull-right">
+                                            <img src="{{ URL::to('cameo')}}/img/invoice.png" alt="" style="max-width: 250px;width: 100%;">
+                                        </div>
+                                    </div>
+
+                                    <div class="mg-b-lg clearfix row">
+
+                                        <div class="col-md-5">
+                                            <h4>To :</h4>
+                                            <address>
+                                                {{ Former::text('toName','')->class('form-control')->placeholder('Att. name')}}
+                                                {{ Former::text('toAddress1','')->class('form-control')->placeholder('Address')}}
+                                                {{ Former::text('toAddress2','')->class('form-control')}}
+
+                                                {{ Former::text('toPhone','')->class('form-control')->placeholder('Phone number')}}
+                                            </address>
+                                        </div>
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="col-md-5 form-vertical pull-right">
+                                            <h4>Invoice Number :</h4>
+                                            {{ Former::text('invNumber','')->placeholder('Invoice Number')->class('form-control dateinput') }}
+                                            {{ Former::text('invDate','')->placeholder('Invoice Date')->class('form-control dateinput') }}
+                                            {{ Former::text('invDueDate','')->placeholder('Due Date')->class('form-control dateinput') }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Order Summary</div>
+                                        <div class="panel-body no-padding">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Item</th>
+                                                            <th>Description</th>
+                                                            <th>Unit Cost</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th><input type="text" class="form-control"></th>
+                                                            <th><input type="text" class="form-control"></th>
+                                                            <th><input type="text" class="form-control"></th>
+                                                            <th><input type="text" class="form-control"></th>
+                                                            <th><input type="text" class="form-control"></th>
+                                                            <th><span><i class="fa fa-plus-square add-item" ></i></span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                1
+                                                            </td>
+                                                            <td>
+                                                                Web Updates
+                                                            </td>
+                                                            <td>
+                                                                Monthly web updates for http://www.themeforest.net
+                                                            </td>
+                                                            <td>
+                                                                $250.00
+                                                            </td>
+                                                            <td>
+                                                                1
+                                                            </td>
+                                                            <td>
+                                                                $250.00
+                                                            </td>
+                                                            <td><span><i class="fa fa-minus-square remove-item" ></i></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                2
+                                                            </td>
+                                                            <td>
+                                                                VPN Hosting
+                                                            </td>
+                                                            <td>
+                                                                <span class="label label-danger">Renewal</span>
+                                                                Monthly dedicated VPN web hosting (1 Jan - 30 åJan, 2014)
+                                                            </td>
+                                                            <td>
+                                                                $650.00
+                                                            </td>
+                                                            <td>
+                                                                1
+                                                            </td>
+                                                            <td>
+                                                                $650.00
+                                                            </td>
+                                                            <td><span><i class="fa fa-minus-square" ></i></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4" rowspan="4"></td>
+                                                            <td colspan="1" class="text-right">Subtotal</td>
+                                                            <td class="text-left">$875.00</td>
+                                                            <td><span><i class="fa fa-minus-square" ></i></span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="1" class="text-right">Total</td>
+                                                            <td>$875.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="1" class="text-right">Amount Paid</td>
+                                                            <td>$0.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="1" class="text-right">Balance Due</td>
+                                                            <td>$875.00</td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <p class="pull-right mg-r-md">
+                                                {{ Form::submit('Save',array('class'=>'btn btn-primary'))}}&nbsp;&nbsp;
+                                                {{ HTML::link($back,'Cancel',array('class'=>'btn'))}}
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+
+{{Former::close()}}
 
 <script type="text/javascript">
 
-
 $(document).ready(function() {
+
+    $('.remove-item').on('click',function(){
+        console.log(this);
+    });
 
     $('#name').keyup(function(){
         var title = $('#name').val();

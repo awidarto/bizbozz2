@@ -12,7 +12,7 @@ class UnitController extends AdminController {
         //$this->crumb->append('Home','left',true);
         //$this->crumb->append(strtolower($this->controller_name));
 
-        $this->model = new Product();
+        $this->model = new Buildingunit();
         //$this->model = DB::collection('documents');
 
     }
@@ -30,21 +30,16 @@ class UnitController extends AdminController {
 
         $this->heads = array(
             //array('Photos',array('search'=>false,'sort'=>false)),
-            array('SKU',array('search'=>true,'sort'=>true)),
-            array('Code',array('search'=>true,'sort'=>true, 'attr'=>array('class'=>'span2'))),
-            array('Picture',array('search'=>true,'sort'=>true ,'attr'=>array('class'=>'span2'))),
-            array('Description',array('search'=>true,'sort'=>true)),
-            array('Series',array('search'=>true,'sort'=>true)),
-            array('Price',array('search'=>true,'sort'=>true)),
-            array('Disc. Price',array('search'=>true,'sort'=>true)),
+            array('Building',array('search'=>true,'sort'=>true)),
+            array('Floor',array('search'=>true,'sort'=>true, 'attr'=>array('class'=>'col-md-2 form-control'))),
+            array('Number',array('search'=>true,'sort'=>true ,'attr'=>array('class'=>'col-md-2 form-control'))),
+            array('Photos',array('search'=>false,'sort'=>false)),
+            array('Current Tenant',array('search'=>true,'sort'=>true)),
+            array('Type',array('search'=>true,'sort'=>true)),
+            array('Rental Rate',array('search'=>true,'sort'=>true)),
+            array('Square Meter',array('search'=>true,'sort'=>true)),
             array('Category',array('search'=>true,'sort'=>true,'select'=>Prefs::ExtractProductCategory() )),
-            array('Length / Panjang',array('search'=>true,'sort'=>true)),
-            array('Width / Lebar',array('search'=>true,'sort'=>true)),
-            array('Height / Tinggi',array('search'=>true,'sort'=>false)),
-            array('Diameter',array('search'=>true,'sort'=>false)),
-            array('Size Description',array('search'=>true,'sort'=>true)),
-            array('Color',array('search'=>true,'sort'=>true)),
-            array('Material',array('search'=>true,'sort'=>true)),
+            array('Description',array('search'=>true,'sort'=>true)),
             array('Tags',array('search'=>true,'sort'=>true)),
             array('Created',array('search'=>true,'sort'=>true,'date'=>true)),
             array('Last Update',array('search'=>true,'sort'=>true,'date'=>true)),
@@ -53,6 +48,10 @@ class UnitController extends AdminController {
         //print $this->model->where('docFormat','picture')->get()->toJSON();
 
         $this->title = 'Building Unit';
+
+        $this->infourl = 'unit/info';
+
+        $this->uploadurl = 'unit/modalupload';
 
         $this->additional_filter = View::make('products.addfilter')->render();
 
@@ -67,31 +66,27 @@ class UnitController extends AdminController {
 
         $this->fields = array(
             //array('SKU',array('kind'=>'text','query'=>'like','pos'=>'both','callback'=>'namePic','show'=>true)),
-            array('SKU',array('kind'=>'text','query'=>'like','pos'=>'both','attr'=>array('class'=>'expander'),'show'=>true)),
-            array('SKU',array('kind'=>'text','callback'=>'dispBar', 'query'=>'like','pos'=>'both','show'=>true)),
-            array('SKU',array('kind'=>'text', 'callback'=>'namePic', 'query'=>'like','pos'=>'both','show'=>true)),
-            array('itemDescription',array('kind'=>'text','query'=>'like','pos'=>'both','attr'=>array('class'=>'expander'),'show'=>true)),
-            array('series',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('priceRegular',array('kind'=>'numeric','query'=>'like','pos'=>'both','show'=>true)),
-            array('priceDiscount',array('kind'=>'numeric','query'=>'like','pos'=>'both','show'=>true)),
+            array('building',array('kind'=>'text','query'=>'like','pos'=>'both','attr'=>array('class'=>'expander'),'show'=>true)),
+            array('floor',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
+            array('number',array('kind'=>'text', 'query'=>'like','pos'=>'both','show'=>true)),
+            array('number',array('kind'=>'text', 'callback'=>'namePic', 'query'=>'like','pos'=>'both','show'=>true)),
+            array('currentTenant',array('kind'=>'text','query'=>'like','pos'=>'both','attr'=>array('class'=>'expander'),'show'=>true)),
+            array('type',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
+            array('rentalRate',array('kind'=>'currency','query'=>'like','pos'=>'both','show'=>true)),
+            array('squareMeter',array('kind'=>'numeric','query'=>'like','pos'=>'both','show'=>true)),
             array('category',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('L',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('W',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('H',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('D',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('sizeDescription',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('colour',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
-            array('material',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
+            array('unitDescription',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true)),
             array('tags',array('kind'=>'text','query'=>'like','pos'=>'both','show'=>true,'callback'=>'splitTag')),
             array('createdDate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),
             array('lastUpdate',array('kind'=>'datetime','query'=>'like','pos'=>'both','show'=>true)),
         );
-
+        /*
         $categoryFilter = Input::get('categoryFilter');
 
         if($categoryFilter != ''){
             $this->additional_query = array('category'=>$categoryFilter);
         }
+        */
 
         return parent::postIndex();
     }
@@ -152,11 +147,15 @@ class UnitController extends AdminController {
             $data['defaultpic'] = '';
         }
 
+        $cats = Prefs::getProductCategory()->ProductCatToSelection('slug', 'title', false);
+        if(isset($data['categoryLink'])){
+            $data['category'] = $cats[$data['categoryLink']];
+        }else{
+            $data['category'] = '';
+        }
+
         $data['defaultpictures'] = $defaults;
         $data['files'] = $files;
-
-        $cats = Prefs::getProductCategory()->ProductCatToSelection('slug', 'title', false);
-        $data['category'] = $cats[$data['categoryLink']];
 
         return $data;
     }
@@ -243,24 +242,11 @@ class UnitController extends AdminController {
             $data['brc3'] = '';
         }
 
-        $data['defaultpictures'] = $defaults;
-        $data['files'] = $files;
-
-
         $cats = Prefs::getProductCategory()->ProductCatToSelection('slug', 'title', false);
         $data['category'] = $cats[$data['categoryLink']];
 
-
-        $unitdata = array_merge(array('id'=>$id),$data);
-
-        //$this->updateStock($unitdata);
-
-        Commerce::updateStock($unitdata);
-
-        unset($data['outlets']);
-        unset($data['outletNames']);
-        unset($data['addQty']);
-        unset($data['adjustQty']);
+        $data['defaultpictures'] = $defaults;
+        $data['files'] = $files;
 
         return $data;
     }
@@ -309,10 +295,10 @@ class UnitController extends AdminController {
     {
 
         $this->validator = array(
-            'SKU' => 'required',
-            'categoryLink' => 'required',
-            'itemDescription' => 'required',
-            'priceRegular' => 'required',
+            'building' => 'required',
+            'floor' => 'required',
+            'number' => 'required',
+            'unitDescription' => 'required'
         );
 
         return parent::postAdd($data);
@@ -321,10 +307,10 @@ class UnitController extends AdminController {
     public function postEdit($id,$data = null)
     {
         $this->validator = array(
-            'SKU' => 'required',
-            'categoryLink' => 'required',
-            'itemDescription' => 'required',
-            'priceRegular' => 'required',
+            'building' => 'required',
+            'floor' => 'required',
+            'number' => 'required',
+            'unitDescription' => 'required'
         );
 
         return parent::postEdit($id,$data);
@@ -411,7 +397,7 @@ class UnitController extends AdminController {
     public function makeActions($data)
     {
         $delete = '<span class="del" id="'.$data['_id'].'" ><i class="fa fa-trash"></i> Delete</span>';
-        $edit = '<a href="'.URL::to('products/edit/'.$data['_id']).'"><i class="fa fa-edit"></i> Update</a>';
+        $edit = '<a href="'.URL::to('unit/edit/'.$data['_id']).'"><i class="fa fa-edit"></i> Update</a>';
         $dl = '<a href="'.URL::to('brochure/dl/'.$data['_id']).'" target="new"><i class="fa fa-download"></i> Download</a>';
         $print = '<a href="'.URL::to('brochure/print/'.$data['_id']).'" target="new"><i class="fa fa-print"></i> Print</a>';
         $upload = '<span class="upload" id="'.$data['_id'].'" rel="'.$data['SKU'].'" ><i class="fa fa-upload"></i> Upload Picture</span>';
@@ -506,6 +492,138 @@ class UnitController extends AdminController {
             return $name;
         }
     }
+
+    public function postInfo(){
+        $pid = Input::get('product_id');
+
+        $p = Buildingunit::find($pid);
+
+        if($p){
+            return Response::json(array('result'=>'OK:FOUND', 'data'=>$p->toArray() ));
+        }else{
+            return Response::json(array('result'=>'ERR:NOTFOUND'));
+        }
+    }
+
+    public function postModalupload(){
+        $data = Input::get();
+
+
+        $defaults = array();
+
+        $files = array();
+
+        if( isset($data['file_id']) && count($data['file_id'])){
+
+            $data['defaultpic'] = (isset($data['defaultpic']))?$data['defaultpic']:$data['file_id'][0];
+            $data['brchead'] = (isset($data['brchead']))?$data['brchead']:$data['file_id'][0];
+            $data['brc1'] = (isset($data['brc1']))?$data['brc1']:$data['file_id'][0];
+            $data['brc2'] = (isset($data['brc2']))?$data['brc2']:$data['file_id'][0];
+            $data['brc3'] = (isset($data['brc3']))?$data['brc3']:$data['file_id'][0];
+
+
+            for($i = 0 ; $i < count($data['file_id']); $i++ ){
+
+
+                $files[$data['file_id'][$i]]['thumbnail_url'] = $data['thumbnail_url'][$i];
+                $files[$data['file_id'][$i]]['large_url'] = $data['large_url'][$i];
+                $files[$data['file_id'][$i]]['medium_url'] = $data['medium_url'][$i];
+                $files[$data['file_id'][$i]]['full_url'] = $data['full_url'][$i];
+
+                $files[$data['file_id'][$i]]['delete_type'] = $data['delete_type'][$i];
+                $files[$data['file_id'][$i]]['delete_url'] = $data['delete_url'][$i];
+                $files[$data['file_id'][$i]]['filename'] = $data['filename'][$i];
+                $files[$data['file_id'][$i]]['filesize'] = $data['filesize'][$i];
+                $files[$data['file_id'][$i]]['temp_dir'] = $data['temp_dir'][$i];
+                $files[$data['file_id'][$i]]['filetype'] = $data['filetype'][$i];
+                $files[$data['file_id'][$i]]['fileurl'] = $data['fileurl'][$i];
+                $files[$data['file_id'][$i]]['file_id'] = $data['file_id'][$i];
+                $files[$data['file_id'][$i]]['caption'] = $data['caption'][$i];
+
+                if($data['defaultpic'] == $data['file_id'][$i]){
+                    $defaults['thumbnail_url'] = $data['thumbnail_url'][$i];
+                    $defaults['large_url'] = $data['large_url'][$i];
+                    $defaults['medium_url'] = $data['medium_url'][$i];
+                    $defaults['full_url'] = $data['full_url'][$i];
+                }
+
+                if($data['brchead'] == $data['file_id'][$i]){
+                    $defaults['brchead'] = $data['large_url'][$i];
+                }
+
+                if($data['brc1'] == $data['file_id'][$i]){
+                    $defaults['brc1'] = $data['large_url'][$i];
+                }
+
+                if($data['brc2'] == $data['file_id'][$i]){
+                    $defaults['brc2'] = $data['large_url'][$i];
+                }
+
+                if($data['brc3'] == $data['file_id'][$i]){
+                    $defaults['brc3'] = $data['large_url'][$i];
+                }
+
+
+            }
+
+        }else{
+
+            $data['thumbnail_url'] = array();
+            $data['large_url'] = array();
+            $data['medium_url'] = array();
+            $data['full_url'] = array();
+            $data['delete_type'] = array();
+            $data['delete_url'] = array();
+            $data['filename'] = array();
+            $data['filesize'] = array();
+            $data['temp_dir'] = array();
+            $data['filetype'] = array();
+            $data['fileurl'] = array();
+            $data['file_id'] = array();
+            $data['caption'] = array();
+
+            $data['defaultpic'] = '';
+            $data['brchead'] = '';
+            $data['brc1'] = '';
+            $data['brc2'] = '';
+            $data['brc3'] = '';
+        }
+
+
+        $data['defaultpictures'] = $defaults;
+        $data['files'] = $files;
+
+        $p = Buildingunit::find($data['upload_id']);
+
+        $p->thumbnail_url =  $data['thumbnail_url'];
+        $p->large_url =  $data['large_url'];
+        $p->medium_url =  $data['medium_url'];
+        $p->full_url =  $data['full_url'];
+        $p->delete_type =  $data['delete_type'];
+        $p->delete_url =  $data['delete_url'];
+        $p->filename =  $data['filename'];
+        $p->filesize =  $data['filesize'];
+        $p->temp_dir =  $data['temp_dir'];
+        $p->filetype =  $data['filetype'];
+        $p->fileurl =  $data['fileurl'];
+        $p->file_id =  $data['file_id'];
+        $p->caption =  $data['caption'];
+        $p->defaultpic =  $data['defaultpic'];
+        $p->brchead =  $data['brchead'];
+        $p->brc1 =  $data['brc1'];
+        $p->brc2 =  $data['brc2'];
+        $p->brc3 =  $data['brc3'];
+        $p->defaultpictures =  $data['defaultpictures'];
+        $p->files =  $data['files'];
+
+        if($p->save()){
+            return Response::json(array('result'=>'OK:UPLOADED' ));
+        }else{
+            return Response::json(array('result'=>'ERR:UPDATEFAILED' ));
+        }
+
+    }
+
 
     public function getViewpics($id)
     {

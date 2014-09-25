@@ -85,7 +85,7 @@
                 <div class="scroll-menu">
                     <!-- main navigation -->
                     <nav class="main-navigation slimscroll" data-height="auto" data-size="4px" data-color="#ddd" data-distance="0">
-					    @include('appmenus.'.Auth::user()->organization['apptype'])
+					    @include('appmenus.building')
                     </nav>
 
                 </div>

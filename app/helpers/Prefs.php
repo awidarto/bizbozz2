@@ -126,6 +126,34 @@ class Prefs {
         return self::$productcategory;
     }
 
+    public static function getUnitCategory(){
+        $c = Unitcategory::get();
+
+        self::$productcategory = $c;
+        return new self;
+    }
+
+    public function UnitCatToSelection($value, $label, $all = true)
+    {
+        if($all){
+            $ret = array(''=>'Select Category');
+        }else{
+            $ret = array();
+        }
+
+        foreach (self::$productcategory as $c) {
+            $ret[$c->{$value}] = $c->{$label};
+        }
+
+
+        return $ret;
+    }
+
+    public function UnitCatToArray()
+    {
+        return self::$productcategory;
+    }
+
 
     public static function getOutlet(){
         $c = Outlet::get();
